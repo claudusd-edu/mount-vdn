@@ -21,15 +21,11 @@ fi
 
 echo "Copy private key $key_name to vdn"
 
-scp -P $ssh_port ~/.ssh/$key_name root@localhost:/root/.ssh/$key_name
-
-ssh-keyscan -t rsa github.com >> ~/.ssh/$key_name
-
-ssh-keyscan github.com >> ~/.ssh/known_hosts
+scp -P $ssh_port ~/.ssh/$key_name root@localhost:/root/.ssh/edu_rsa
 
 echo "Clone project git@github.com:claudusd-edu/licpro-2022-js-project-$subject.git"
 
-ssh -p $ssh_port root@localhost "GIT_SSH_COMMAND='ssh -i /root/.ssh/$key_name -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'  git clone git@github.com:claudusd-edu/licpro-2022-js-project-$subject.git /root/javascript"
+ssh -p $ssh_port root@localhost "GIT_SSH_COMMAND='ssh -i /root/.ssh/edu_rsa -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'  git clone git@github.com:claudusd-edu/licpro-2022-js-project-$subject.git /root/javascript"
 
 
 echo "Mount dir"
